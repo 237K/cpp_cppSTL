@@ -81,7 +81,7 @@ void FuelWarning(const car &car)
 
 int main(void)
 {
-    car MyCar1 = {"Mycar1", 50, 0};
+    car MyCar1 = {"Mycar1", 100, 0};
     Accel(MyCar1);
     Accel(MyCar1);
     Accel(MyCar1);
@@ -90,7 +90,7 @@ int main(void)
     Break(MyCar1);
     ShowCarState(MyCar1);
     
-    car MyCar2 = {"Mycar2", 50, 0};
+    car MyCar2 = {"Mycar2", 100, 0};
     Accel(MyCar2);
     Accel(MyCar2);
     Break(MyCar2);
