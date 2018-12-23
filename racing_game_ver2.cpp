@@ -14,12 +14,6 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-#define ID_LEN      20
-#define MAX_SPEED   200
-#define FUEL_STEP   2
-#define ACC_STEP    10
-#define BREAK_STEP  10
-
 /* 기존에는 함수를 구조체 밖에 구현하였음.
  
 struct car
@@ -84,9 +78,21 @@ void FuelWarning(const car &car)
 
 //함수를 구조체 안에 포함시킨 형태
 
+namespace CAR_CONST
+{
+    enum
+    {
+        ID_LEN      =20,
+        MAX_SPEED   =200,
+        FUEL_STEP   =2,
+        ACC_STEP    =10,
+        BREAK_STEP  =10
+    };
+}
+
 struct car
 {
-    char userID[ID_LEN];
+    char userID[CAR_CONST::ID_LEN];
     int fuel_gauge;
     int current_speed;
 
@@ -105,15 +111,15 @@ struct car
             cout<<"현재 연료가 부족합니다!"<<endl;
             return;
         }
-        else fuel_gauge -= FUEL_STEP;
+        else fuel_gauge -= CAR_CONST::FUEL_STEP;
         
-        if(current_speed + ACC_STEP >= MAX_SPEED)
+        if(current_speed + CAR_CONST::ACC_STEP >= CAR_CONST::MAX_SPEED)
         {
-            current_speed = MAX_SPEED;
+            current_speed = CAR_CONST::MAX_SPEED;
             cout<<"최대 속도 입니다!"<<endl;
             return;
         }
-        current_speed += ACC_STEP;
+        current_speed += CAR_CONST::ACC_STEP;
         
     }
     
@@ -125,13 +131,13 @@ struct car
             return;
         }
         
-        if(current_speed - BREAK_STEP <= 0)
+        if(current_speed - CAR_CONST::BREAK_STEP <= 0)
         {
             current_speed = 0;
             return;
         }
         
-        current_speed -= BREAK_STEP;
+        current_speed -= CAR_CONST::BREAK_STEP;
     }
     
     void FuelWarning()
