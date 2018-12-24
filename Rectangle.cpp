@@ -4,7 +4,8 @@
 //
 //  Created by 형성모 on 2018. 12. 24..
 //
-//
+//  정보은닉, 캡슐화, 클래스 생성자와 멤버 이니셜라이즈를 공부하였습니다.
+//  공부한 내용을 바탕으로 점의 좌표와 두 점으로 이루어진 직사각형의 좌표를 구하는 프로그램 입니다.
 
 #include <iostream>
 
@@ -32,7 +33,7 @@ private:
     Point lowRight;
 public:
     Rectangle(const int &x1, const int &y1, const int &x2, const int &y2);
-    bool init(const Point upLeft, const Point lowRight) const;
+    bool init(const Point &upLeft, const Point &lowRight) const;
     void ShowRectangle() const;
 };
 
@@ -48,7 +49,7 @@ Point::Point(const int &xpos, const int &ypos)
 
 bool Point::init(const int xpos, const int ypos) const
 {
-    if(xpos < 0 || xpos > 100)
+    if(xpos < 0 || xpos > 100 || ypos < 0 || xpos > 100)
     {
         return false;
     }
@@ -95,7 +96,7 @@ Rectangle::Rectangle(const int &x1, const int &y1, const int &x2, const int &y2)
     }
 }
 
-bool Rectangle::init(const Point upLeft, const Point lowRight) const
+bool Rectangle::init(const Point &upLeft, const Point &lowRight) const
 {
     if(upLeft.GetX() > lowRight.GetX() || upLeft.GetY() < lowRight.GetY())
     {
