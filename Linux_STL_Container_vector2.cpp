@@ -7,7 +7,7 @@
 //  
 //  Last two days, I have been looking at the outline of STL and now I look deeply into it.
 //  First, STL container. <vector>
-//  Think about capacity() of vector
+//  learn about vector's memory allocation with capacity() of vector
 //
 #include <iostream>
 #include <vector>
