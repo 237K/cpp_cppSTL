@@ -7,21 +7,22 @@
 //  STL 알고리즘 #include <algorithm>
 //      1. 원소를 수정하지 않는 알고리즘
 //          1) adjacent_find(v.begin(), v.end(), (func)) : begin부터 end까지의 순차열에서 현재 원소와 다음 원소가 같아지는 첫 원소의 반복자 반환
-//          2) count(v.begin(), v.end(), num) : begin부터 end까지 num의 개수를 반환
-//          2-2) count_if(v.begin(), v.end(), func) : func를 만족하는 원소 개수 반환
+//          2) count(_if)(v.begin(), v.end(), num(func)) : begin부터 end까지 num의 개수를 반환 (func를 만족하는 원소 개수 반환)
 //          3) equal(v1.begin(), v1.end(), v2.begin(), (func)) : v1 [begin, end)구간을 v2의 해당 구간과 (같은지/func)비교, bool반환
+//          4) find(_if)(v.begin(), v.end(), num(func)) : [begin, end)구간에서 num(func을 만족하는) 첫번째 원소 반환
+//
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
 using namespace std;
 
-bool Pred(int n)
+bool Pred_1var(int n)
 {
     return n > 30 ? true : false;
 }
 
-bool Pred2(int left, int right)
+bool Pred_2var(int left, int right)
 {
     return abs(right - left) < 15;
 }
@@ -57,10 +58,10 @@ int main(void)
     }
     cout<<endl<<endl;
     
-    //count
+    //count, count_if
     cout<<"40의 개수 : "<<count(v.begin(), v.end(), 40)<<endl;
     
-    cout<<"30보다 큰 원소 개수 : "<<count_if(v.begin(), v.end(), Pred)<<endl;
+    cout<<"30보다 큰 원소 개수 : "<<count_if(v.begin(), v.end(), Pred_1var)<<endl;
     
     //equal
     vector<int> v2;
@@ -70,8 +71,14 @@ int main(void)
     
     bool bl = equal(v2.begin(), v2.end(), v.begin());
     cout<<"v2 [begin, end) 구간과 v 비교 : "<<bl<<endl;
-    cout<<"v2, v 각 원소의 차이가 15보다 작은지 비교 : "<<equal(v2.begin(), v2.end(), v.begin(), Pred2)<<endl;
+    cout<<"v2, v 각 원소의 차이가 15보다 작은지 비교 : "<<equal(v2.begin(), v2.end(), v.begin(), Pred_2var)<<endl;
     
+    //find, find_if
+    vector<int>::iterator find_iter;
+    find_iter = find(v.begin(), v.end(), 40);
+    cout<<"40과 같은 원소를 찾습니다 "<<*find_iter<<endl;
+    find_iter = find_if(v.begin(), v.end(), Pred_1var);
+    cout<<"30보다 큰 첫 번째 원소를 찾습니다 "<<*find_iter<<endl;
     
     return 0;
 }
