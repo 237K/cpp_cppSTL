@@ -12,6 +12,7 @@
 //          4) find(_if)(v.begin(), v.end(), num(func)) : [begin, end)구간에서 num과 같은 첫번째 원소 반환
 //          5) find_end(v1.begin(), v1.end(), v2.begin(), v2.end(), (func)) : v1에 v2와 같은 순차열이 있는지 확인, 마지막 순차열의 첫 번째 원소반환
 //          6) find_first_of(v.begin(), v.end(), v2.begin(), v2.end(), (func)) : find_end처럼 구간 검색, 모든 원소 중 같은 원소가 하나라도 발견되면 발견된 첫 번쩨 원소의 반복자 반환
+//          7) for_each(v.begin(), v.end(), func()) : 구간의 모든 원소에 대해 func을 적용. 원소를 수정하는 알고리즘에도 포함
 //
 
 #include <iostream>
@@ -33,6 +34,25 @@ bool Pred_ffo(int left, int right)
 {
     return left > right ? true : false;
 }
+
+template <typename T>
+void Print(const T& t)
+{
+    cout<<t<<' ';
+}
+
+template <typename T>
+class PrintVector
+{
+private:
+    char ch;
+public:
+    explicit PrintVector(char c = ' ') :ch(c) {}
+    void operator()(const T& t)
+    {
+        cout<<t<<ch;
+    }
+};
 
 int main(void)
 {
@@ -136,6 +156,22 @@ int main(void)
     if(find_first_iter == v.end()) cout<<"조건과 일치하는 원소가 없습니다"<<endl;
     cout<<"find_first_iter = "<<*find_first_iter<<endl;
     cout<<endl;
+    
+    //for_each
+    cout<<"for_each를 이용한 출력"<<endl;
+    for_each(v.begin(), v.end(), Print<int>);
+    cout<<endl;
+    for_each(v2.begin(), v2.end(), Print<int>);
+    cout<<endl<<endl;
+    
+    //for_each functor 호출
+    cout<<"for_each에서 functor를 호출"<<endl;
+    for_each(v.begin(), v.end(), PrintVector<int>());
+    cout<<endl;
+    for_each(v.begin(), v.end(), PrintVector<int>(','));
+    cout<<endl;
+    for_each(v2.begin(), v2.end(), PrintVector<int>('\n'));
+    cout<<endl<<endl;
     
     return 0;
 }
