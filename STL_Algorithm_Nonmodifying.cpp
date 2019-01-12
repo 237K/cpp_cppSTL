@@ -16,6 +16,7 @@
 //          8) lexicographical_compare(v.begin(), v.end(), v2.begin(), v2.end(), (func)) : 사전편찬식으로 비교
 //          9) max, min(v.begin(), v.end(), (func))
 //          10) max_element, min_element(v.begin(), v.end(), (func))
+//          11) mismatch(v1.begin(), v1.end(), v2.begin(), (func)) : 원소 값이 다른 첫 원소의 반복자 반환
 //
 
 #include <iostream>
@@ -293,6 +294,24 @@ int main(void)
     point_min_iter = min_element(v4.begin(), v4.end(), Pcompare);
     cout<<"max_element : "<<*point_max_iter;
     cout<<"min_element : "<<*point_min_iter;
+    cout<<endl;
+    
+    //mismatch
+    pair<vector<int>::iterator, vector<int>::iterator> mismatch_pair;
+    mismatch_pair = mismatch(v3.begin(), v3.end(), v.begin());
+    for(iter = v.begin(); iter != v.end(); ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    for(iter = v3.begin(); iter != v3.end(); ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    
+    cout<<"mismatch in v3 : "<<*(mismatch_pair.first)<<endl;
+    cout<<"mismatch in v : "<<*(mismatch_pair.second)<<endl;
     cout<<endl;
     
     return 0;
