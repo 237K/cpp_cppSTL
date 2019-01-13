@@ -17,6 +17,8 @@
 //          9) max, min(v.begin(), v.end(), (func))
 //          10) max_element, min_element(v.begin(), v.end(), (func))
 //          11) mismatch(v1.begin(), v1.end(), v2.begin(), (func)) : 원소 값이 다른 첫 원소의 반복자 반환
+//          12) search(v1.begin(), v1.end(), v2.begin(), v2.end()) : find_end와 같은데 첫 번째 순차열의 반복자 반환
+//          13) search_n(v.begin(), v.end(), n, x, (func)) : v에서 n이 x번 연속한 첫 원소의 반복자 반환
 //
 
 #include <iostream>
@@ -312,6 +314,52 @@ int main(void)
     
     cout<<"mismatch in v3 : "<<*(mismatch_pair.first)<<endl;
     cout<<"mismatch in v : "<<*(mismatch_pair.second)<<endl;
+    cout<<endl;
+    
+    //mismatch function
+    cout<<"mismatch에 조건자를 추가한 경우(원소의 차이가 15이상인 경우)"<<endl;
+    mismatch_pair = mismatch(v3.begin(), v3.end(), v.begin(), Pred_2var);
+    cout<<"mismatch in v3 : "<<*(mismatch_pair.first)<<endl;
+    cout<<"mismatch in v : "<<*(mismatch_pair.second)<<endl;
+    cout<<endl;
+    
+    //search
+    vector<int>::iterator search_iter;
+    search_iter = search(v.begin(), v.end(), v2.begin(), v2.end());
+    for(iter = v.begin(); iter != v.end(); ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    for(iter = v2.begin(); iter != v2.end(); ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    cout<<"search_iter : "<<*search_iter<<endl;
+    cout<<"search_iter+1 : "<<*(search_iter+1)<<endl;
+    cout<<endl;
+    
+    //search_n
+    vector<int>::iterator search_n_iter;
+    search_n_iter = search_n(v.begin(), v.end(), 2, 40);
+    for(iter = v.begin(); iter != v.end(); ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    cout<<"40이 2번 연속한 순차열의 첫 반복자 : "<<*search_n_iter<<endl;
+    cout<<"40이 2번 연속한 순차열의 두 번째 반복자 : "<<*(search_n_iter+1)<<endl;
+    cout<<endl;
+    
+    //search_n(func)
+    search_n_iter = search_n(v.begin(), v.end(), 2, 40, Pred_2var);
+    for(iter = v.begin(); iter != v.end(); ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    cout<<"순차열에서 40과의 차이가 15보다 작은 원소가 2번 이상 연속한 첫 원소의 반복자는 : "<<*search_n_iter<<endl;
     cout<<endl;
     
     return 0;
