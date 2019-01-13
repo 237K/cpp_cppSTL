@@ -13,6 +13,8 @@
 //          5) for_each(v1.begin(), v1.end(), func) : v1의 각 원소에 func(*p)를 적용함
 //          6) generate(v1.begin(), v1.end(), func) : 각 원소에 func을 채움. for_each나 transform과는 달리 원소의 원값을 활용할 수 없음
 //          7) generate_n(v1.begin(), n, func) : [begin, begin+3) 구간에 generate
+//          8) swap(a, b) / iter_swap(iter1, iter2) : swap
+//          9) merge(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin(), (func)) : v1, v2 정렬합병해서 v3에 (디폴트:less)
 //
 
 #include <iostream>
@@ -58,6 +60,19 @@ public:
     int operator()()
     {
         return data++;
+    }
+};
+
+template <typename T>
+class Integer10
+{
+private:
+    T data;
+public:
+    Integer10(T init=0) : data(init) {}
+    int operator()()
+    {
+        return data+=10;
     }
 };
 
@@ -121,6 +136,46 @@ int main(void)
     cout<<"6) generate 원소의 원값을 활용하지 않고 값을 채움"<<endl;
     generate(v1.begin(), v1.end(), Integer<int>(1));
     cout<<"v1의 각 원소를 1씩 증가시킴 : "; Print(v1);
+    cout<<endl;
+    
+    //iter_swap
+    cout<<"8) iter_swap"<<endl;
+    vector<int>::iterator piter = v1.begin();
+    vector<int>::iterator qiter = v1.end()-1;
+    cout<<"v1 : "; Print(v1);
+    cout<<"v1 제일 처음 원소와 마지막 원소(end-1)를 iter_swap"<<endl;
+    iter_swap(piter, qiter);
+    cout<<"v1 : "; Print(v1);
+    cout<<endl;
+    
+    //merge
+    cout<<"9) merge"<<endl;
+    generate(v1.begin(), v1.end(), Integer10<int>(10));
+    vector<int> vector_init(0);
+    v2.swap(vector_init);
+    v2.resize(3);
+    vector<int>::iterator v2_insert_iter = v2.begin();
+    vector<int>::iterator v2_insert_iter2;
+    vector<int>::iterator v2_insert_iter3;
+    v2_insert_iter2 = v2.insert(v2_insert_iter, 15);
+    v2_insert_iter2++;
+    v2_insert_iter3 = v2.insert(v2_insert_iter2, 25);
+    v2_insert_iter3++;
+    v2.insert(v2_insert_iter3, 35);
+    v2.pop_back();
+    v2.pop_back();
+    v2.pop_back();
+    vector<int> v3(10);
+    
+    cout<<"v1 : "; Print(v1);
+    cout<<"v2 : "; Print(v2);
+    cout<<"v3 : "; Print(v3);
+    cout<<"merge(v1, v2, v3, (less))"<<endl;
+    merge(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin());
+    cout<<"v1 : "; Print(v1);
+    cout<<"v2 : "; Print(v2);
+    cout<<"v3 : "; Print(v3);
+    
     cout<<endl;
     
     return 0;
