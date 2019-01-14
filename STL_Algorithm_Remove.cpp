@@ -9,6 +9,7 @@
 //          1) remove(_if)(v1.begin, v1.end, x(func)) : v1에서 x를 없앰. 다음 원소를 한 칸씩 땡겨와 덮어씀. 사이즈는 변하지 않음
 //          2) v1.erase(remove_iter(remove로 반환받은 iterator), v1.end) : 원소를 제거. 사이즈까지 줄임
 //          3) remove_copy(_if)(v1.begin, v1.end, v2.begin, x(funx)) : x(func)를 제거한 후 v2에 복사. v1은 변경하지 않음
+//          4) unique(v.begin, v.end, (func)) : 인접한 원소를 비교, 조건자(디폴트 : 같은지)에 따라 제거. 논리적으로만 제거. 사이즈 변하지 않음
 //
 
 #include <iostream>
@@ -28,6 +29,11 @@ void Print(const vector<int>& v)
 bool Func_20to30(int n)
 {
     return (n >= 20 && n <= 30) ? true : false;
+}
+
+bool Func_Comp(int left, int right)
+{
+    return abs(right-left) < 10;
 }
 
 template <typename T>
@@ -99,6 +105,39 @@ int main(void)
     }
     cout<<endl<<endl;
     
+    //unique
+    cout<<"4) unique"<<endl;
+    vector<int> v3;
+    vector<int>::iterator unique_iter;
+    v3.push_back(11);
+    v3.push_back(20);
+    v3.push_back(30);
+    v3.push_back(30);
+    v3.push_back(40);
+    v3.push_back(30);
+    v3.push_back(50);
+    v3.push_back(43);
+    
+    cout<<"v3 : "; Print(v3);
+    cout<<"unique 적용"<<endl;
+    unique_iter = unique(v3.begin(), v3.end());
+    cout<<"v3 : "; Print(v3);
+    cout<<"[v3.begin, unique_iter) : ";
+    for(iter = v3.begin(); iter != unique_iter; ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    
+    cout<<"unique 조건자 적용. 인접한 원소의 차이가 10보다 작은 경우"<<endl;
+    unique_iter = unique(v3.begin(), v3.end(), Func_Comp);
+    cout<<"v3 : "; Print(v3);
+    cout<<"[v3.begin, unique_iter : ";
+    for(iter = v3.begin(); iter != unique_iter; ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
     
     return 0;
 }
