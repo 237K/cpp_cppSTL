@@ -17,6 +17,7 @@
 //          9) merge(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin(), (func)) : v1, v2 정렬합병해서 v3에 (디폴트:less)
 //          10) replace(_if)(v1.begin(), v1.end(), x(func), x2) : 구간에서 x인 원소를 x2로 변경
 //          11) replace_copy(_if)(v1.begin(), v1.end(), v2.begin(), x(func), x2) : v1구간에서 x인 원소를 x2로 변경한 후 v2에 복사
+//          12) swap_ranges(v1.begin(), v1.end(), v2.begin()) : v1과 v2의 모든 원소를 swap
 //
 
 #include <iostream>
@@ -86,6 +87,12 @@ bool Func_20under(int n)
 bool Func_100under(int n)
 {
     return n < 100;
+}
+
+int Func_Zero(int& n)
+{
+    n = 0;
+    return n;
 }
 
 int main(void)
@@ -230,6 +237,17 @@ int main(void)
     cout<<"v5 : "; Print(v5);
     cout<<"100보다 작은 원소를 0으로 바꾼 후 v5로 복사"<<endl;
     replace_copy_if(v4.begin(), v4.end(), v5.begin(), Func_100under, 0);
+    cout<<"v4 : "; Print(v4);
+    cout<<"v5 : "; Print(v5);
+    cout<<endl;
+    
+    //swap_ranges
+    cout<<"12) swap_ranges"<<endl;
+    for_each(v4.begin(), v4.end(), Func_Zero);
+    cout<<"v4 : "; Print(v4);
+    cout<<"v5 : "; Print(v5);
+    cout<<" v4, v5를 swap_range"<<endl;
+    swap_ranges(v4.begin(), v4.end(), v5.begin());
     cout<<"v4 : "; Print(v4);
     cout<<"v5 : "; Print(v5);
     cout<<endl;
