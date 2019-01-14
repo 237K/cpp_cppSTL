@@ -18,6 +18,8 @@
 //          10) replace(_if)(v1.begin(), v1.end(), x(func), x2) : 구간에서 x인 원소를 x2로 변경
 //          11) replace_copy(_if)(v1.begin(), v1.end(), v2.begin(), x(func), x2) : v1구간에서 x인 원소를 x2로 변경한 후 v2에 복사
 //          12) swap_ranges(v1.begin(), v1.end(), v2.begin()) : v1과 v2의 모든 원소를 swap
+//          13) transform(v1.begin(), v1.end(), v2.begin(), func) : v1의 각 원소에 func을 적용하고 v2에 대입
+//          13-1) transform(v1.begin(), v1.end(), v2.begin(), v3.begin(), func) : v1과 v2를 func으로 연산한 후 v3에 대입
 //
 
 #include <iostream>
@@ -37,6 +39,11 @@ void Print(const vector<int>& v)
 void Func_EachPlus(int& i)
 {
     i += 5;
+}
+
+int intFunc_EachPlus(int n)
+{
+    return n + 5;
 }
 
 template <typename T>
@@ -93,6 +100,11 @@ int Func_Zero(int& n)
 {
     n = 0;
     return n;
+}
+
+int Func_Add(int n1, int n2)
+{
+    return n1 + n2;
 }
 
 int main(void)
@@ -251,6 +263,35 @@ int main(void)
     cout<<"v4 : "; Print(v4);
     cout<<"v5 : "; Print(v5);
     cout<<endl;
+    
+    //transform
+    cout<<"13) transform"<<endl;
+    v2.resize(10);
+    replace_if(v2.begin(), v2.end(), Func_100under, 0);
+    vector<int>::iterator transform_iter;
+    cout<<"v1 : "; Print(v1);
+    cout<<"v2 : "; Print(v2);
+    cout<<"v1의 각 원소에 5를 더한 값을 v2에 대입"<<endl;
+    transform_iter = transform(v1.begin(), v1.end(), v2.begin(), intFunc_EachPlus);
+    cout<<"v1 : "; Print(v1);
+    cout<<"v2 : "; Print(v2);
+    cout<<"transform의 반환값 : "<<*transform_iter<<endl;
+    cout<<"transform의 반환값 -1 : "<<*(transform_iter-1)<<endl;
+    cout<<endl;
+    
+    //fransform(func)
+    cout<<"transform (func)"<<endl;
+    vector<int> v6(10);
+    cout<<"v1 : "; Print(v1);
+    cout<<"v2 : "; Print(v2);
+    cout<<"v6 : "; Print(v6);
+    cout<<"v1과 v2 각 원소를 합한 후 v6에 대입"<<endl;
+    transform(v1.begin(), v1.end(), v2.begin(), v6.begin(), Func_Add);
+    cout<<"v1 : "; Print(v1);
+    cout<<"v2 : "; Print(v2);
+    cout<<"v6 : "; Print(v6);
+    cout<<endl;
+    
     
     return 0;
 }
