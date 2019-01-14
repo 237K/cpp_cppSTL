@@ -15,6 +15,8 @@
 //          7) generate_n(v1.begin(), n, func) : [begin, begin+3) 구간에 generate
 //          8) swap(a, b) / iter_swap(iter1, iter2) : swap
 //          9) merge(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin(), (func)) : v1, v2 정렬합병해서 v3에 (디폴트:less)
+//          10) replace(_if)(v1.begin(), v1.end(), x(func), x2) : 구간에서 x인 원소를 x2로 변경
+//          11) replace_copy(_if)(v1.begin(), v1.end(), v2.begin(), x(func), x2) : v1구간에서 x인 원소를 x2로 변경한 후 v2에 복사
 //
 
 #include <iostream>
@@ -75,6 +77,16 @@ public:
         return data+=10;
     }
 };
+
+bool Func_20under(int n)
+{
+    return n <= 20 ? true : false;
+}
+
+bool Func_100under(int n)
+{
+    return n < 100;
+}
 
 int main(void)
 {
@@ -175,7 +187,51 @@ int main(void)
     cout<<"v1 : "; Print(v1);
     cout<<"v2 : "; Print(v2);
     cout<<"v3 : "; Print(v3);
+    cout<<endl;
     
+    //replace
+    cout<<"10) replace"<<endl;
+    vector<int> v4;
+    v4.push_back(10);
+    v4.push_back(20);
+    v4.push_back(30);
+    v4.push_back(30);
+    v4.push_back(30);
+    v4.push_back(40);
+    v4.push_back(50);
+    Print(v4);
+    cout<<"30을 33333으로 변경"<<endl;
+    replace(v4.begin(), v4.end(), 30, 33333);
+    Print(v4);
+    cout<<endl;
+    
+    //replace_if
+    cout<<"replace_if"<<endl;
+    Print(v4);
+    cout<<"20이하인 원소를 22222로 변경"<<endl;
+    replace_if(v4.begin(), v4.end(), Func_20under, 22222);
+    Print(v4);
+    cout<<endl;
+    
+    //replace_copy
+    cout<<"11) replace_copy"<<endl;
+    vector<int> v5(10);
+    cout<<"v4 : "; Print(v4);
+    cout<<"v5 : "; Print(v5);
+    cout<<"40을 44444로 바꾼 후 v5로 복사"<<endl;
+    replace_copy(v4.begin(), v4.end(), v5.begin(), 40, 44444);
+    cout<<"v4 : "; Print(v4);
+    cout<<"v5 : "; Print(v5);
+    cout<<endl;
+    
+    //replace_copy_if
+    cout<<"replace_copy_if"<<endl;
+    cout<<"v4 : "; Print(v4);
+    cout<<"v5 : "; Print(v5);
+    cout<<"100보다 작은 원소를 0으로 바꾼 후 v5로 복사"<<endl;
+    replace_copy_if(v4.begin(), v4.end(), v5.begin(), Func_100under, 0);
+    cout<<"v4 : "; Print(v4);
+    cout<<"v5 : "; Print(v5);
     cout<<endl;
     
     return 0;
