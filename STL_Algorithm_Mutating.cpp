@@ -7,6 +7,7 @@
 //  STL 알고리즘 #include <algorithm>
 //      4. 변경 알고리즘
 //          1) next_permutation(v.begin, v.end, (func)) : 다음 조합으로 변경(디폴트:사전순). bool타입 반환
+//          2) prev_permutation(v.begin, v.end, (func))
 //
 
 #include <iostream>
@@ -125,6 +126,35 @@ int main(void)
         {
             cout<<"bool : "<<bool2<<endl;
             cout<<"count : "<<count2<<endl;
+            break;
+        }
+    }
+    cout<<endl;
+    
+    //prev_permutation
+    cout<<"2) prev_permutation"<<endl;
+    vector<int> v3;
+    int count3 = 0;
+    bool bool3;
+    v3.push_back(30);
+    v3.push_back(20);
+    v3.push_back(10);
+    cout<<"v3 : "; PrintVector<int>()(v3);
+    cout<<endl;
+    
+    while (1)
+    {
+        bool3 = prev_permutation(v3.begin(), v3.end());
+        if(bool3 == 1)
+        {
+            cout<<"bool : "<<bool3<<endl;
+            cout<<"v1 : "; PrintVector<int>()(v3);
+            cout<<"count : "<<++count3<<endl<<endl;
+        }
+        else if(bool3 == 0)
+        {
+            cout<<"bool : "<<bool3<<endl;
+            cout<<"count : "<<count3<<endl;
             break;
         }
     }
