@@ -10,6 +10,7 @@
 //          2) prev_permutation(v.begin, v.end, (func))
 //          3) partition, iterator = partition(v.begin, v.end, func) : func이 참인 원소는 [begin, iterator) 거짓인 원소는 [iterator, end)로 분리. 퀵소트에서 pivot값을 기준으로 큰 값과 작은 값을 분류하듯
 //          4) stable_partition(v.begin, v.end, func) : 원소의 상대적인 순서를 유지하며 분리
+//          5) random_shuffle(v.begin, v.end, (func)) : 순차열을 랜덤으로 뒤섞음
 //
 
 #include <iostream>
@@ -226,4 +227,13 @@ int main(void)
     cout<<endl;
     cout<<endl;
     
+    //random_shuffle
+    cout<<"5) random_shuffle"<<endl;
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
+    cout<<endl<<endl;
 }
