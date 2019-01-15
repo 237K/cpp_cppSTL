@@ -9,6 +9,7 @@
 //          1) next_permutation(v.begin, v.end, (func)) : 다음 조합으로 변경(디폴트:사전순). bool타입 반환
 //          2) prev_permutation(v.begin, v.end, (func))
 //          3) partition, iterator = partition(v.begin, v.end, func) : func이 참인 원소는 [begin, iterator) 거짓인 원소는 [iterator, end)로 분리. 퀵소트에서 pivot값을 기준으로 큰 값과 작은 값을 분류하듯
+//          4) stable_partition(v.begin, v.end, func) : 원소의 상대적인 순서를 유지하며 분리
 //
 
 #include <iostream>
@@ -191,6 +192,34 @@ int main(void)
     cout<<endl;
     cout<<"40이상 순차열 : ";
     for(iter = partition_iter; iter != v4.end(); ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    cout<<endl;
+    
+    //stable_partition
+    cout<<"4) stable_partition"<<endl;
+    vector<int> v5;
+    v5.push_back(30);
+    v5.push_back(40);
+    v5.push_back(50);
+    v5.push_back(10);
+    v5.push_back(20);
+    v5.push_back(60);
+    
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    partition_iter = stable_partition(v5.begin(), v5.end(), Func_40under);
+    cout<<"partition_iter : "<<*partition_iter<<endl;
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    cout<<"40미만 순차열 : ";
+    for(iter = v5.begin(); iter != partition_iter; ++iter)
+    {
+        cout<<*iter<<' ';
+    }
+    cout<<endl;
+    cout<<"40이상 순차열 : ";
+    for(iter = partition_iter; iter != v5.end(); ++iter)
     {
         cout<<*iter<<' ';
     }
