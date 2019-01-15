@@ -11,11 +11,17 @@
 //          3) partition, iterator = partition(v.begin, v.end, func) : func이 참인 원소는 [begin, iterator) 거짓인 원소는 [iterator, end)로 분리. 퀵소트에서 pivot값을 기준으로 큰 값과 작은 값을 분류하듯
 //          4) stable_partition(v.begin, v.end, func) : 원소의 상대적인 순서를 유지하며 분리
 //          5) random_shuffle(v.begin, v.end, (func)) : 순차열을 랜덤으로 뒤섞음
+//          6) reverse(v.begin, v.end) : 순차열 뒤집음
+//          7) reverse_copy(v1.begin, v1.end, v2.begin) : 순차열 뒤집어서 복사. v2 마지막 반복자 반환
+//          8) rotate(v.begin, middle_iterator, v.end) : 각 원소를 middle_iterator - v.begin 만큼 왼쪽으로 이동
+//          9) rotate_copy(v1.begin, middle_iterator, v1.end, v2.begin) : 이동 복사. v2 마지막 반복자 반환
 //
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cstdio>
+#include <ctime>
 using namespace std;
 
 /*
@@ -235,5 +241,63 @@ int main(void)
     random_shuffle(v5.begin(), v5.end());
     cout<<"v5 : "; PrintVector<int>()(v5);
     random_shuffle(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
+    cout<<endl;
+    
+    srand((unsigned)time(NULL));
+    random_shuffle(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    random_shuffle(v5.begin(), v5.end());
     cout<<endl<<endl;
+    
+    //reverse
+    cout<<"6) reverse"<<endl;
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    cout<<"reverse!"<<endl;
+    reverse(v5.begin(), v5.end());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    cout<<endl<<endl;
+    
+    //reverse_copy
+    cout<<"7) reverse_copy"<<endl;
+    vector<int> v6(6);
+    vector<int>::iterator reverse_iter;
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    cout<<"reverse_copy"<<endl;
+    reverse_iter = reverse_copy(v5.begin(), v5.end(), v6.begin());
+    cout<<"v5 : "; PrintVector<int>()(v5);
+    cout<<"v6 : "; PrintVector<int>()(v6);
+    cout<<"reverse_iter : "<<*reverse_iter<<endl;
+    cout<<endl;
+    
+    //rotate
+    cout<<"8) rotate"<<endl;
+    vector<int>::iterator middle_iter = v6.begin() + 2;
+    cout<<"v6 : "; PrintVector<int>()(v6);
+    cout<<"rotate 2!"<<endl;
+    rotate(v6.begin(), middle_iter, v6.end());
+    cout<<"v6 : "; PrintVector<int>()(v6);
+    cout<<endl;
+    
+    //rotate_copy
+    cout<<"9) rotate_copy"<<endl;
+    vector<int> v7(6);
+    vector<int>::iterator rotate_iter;
+    cout<<"v6 : "; PrintVector<int>()(v6);
+    cout<<"rotate and copy!"<<endl;
+    rotate_iter = rotate_copy(v6.begin(), middle_iter, v6.end(), v7.begin());
+    cout<<"v6 : "; PrintVector<int>()(v6);
+    cout<<"v7 : "; PrintVector<int>()(v7);
+    cout<<"rotate_copy_iter : "<<*rotate_iter<<endl;
+    cout<<endl;
+    
 }
