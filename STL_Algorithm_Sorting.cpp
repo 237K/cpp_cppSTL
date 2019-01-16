@@ -11,6 +11,7 @@
 //              b) push_heap(b, e, (f)) : vector에 push_back 한 다음 사용
 //              c) pop_heap(b, e, (f)) : 루트노드(가장 큰 원소) 제거. 루트노드와 마지막노드를 교환한 후 힙정렬 실행됨
 //              d) sort_heap(b, e, (f)) : 힙정렬
+//          2) nth_element(b, middle_iter, e) : middle_iter-b 만큼의 원소를 선별(사전순)하여 [b, middle_iter)에 저장
 //
 #include <iostream>
 #include <vector>
@@ -45,6 +46,8 @@ public:
         return data+=10;
     }
 };
+
+void Func_Rand(int& i) { i = rand()%1000; }
 
 int main(void)
 {
@@ -111,4 +114,22 @@ int main(void)
     cout<<"make랑 push를 디폴트로 한 경우에 sort를 greater로 하면 : "; PrintV()(v2);
     cout<<endl;
     
+    //nth_element
+    cout<<"2) nth_element"<<endl;
+    vector<int> v4(100);
+    for_each(v4.begin(), v4.end(), Func_Rand);
+    cout<<"v4 : "; PrintV()(v4);
+    vector<int>::iterator middle_iter = v4.begin()+20;
+    vector<int>::iterator iter;
+    cout<<"middle_iter : "<<*middle_iter<<endl;
+    cout<<endl;
+    nth_element(v4.begin(), middle_iter, v4.end());
+    cout<<"nth_element!"<<endl;
+    cout<<"v4 : "; PrintV()(v4);
+    cout<<"[v4.begin, middle_iter) : ";
+    for(iter = v4.begin(); iter != middle_iter; ++iter) cout<<*iter<<' ';
+    cout<<endl;
+    cout<<"[middle_iter, v4.end) : ";
+    for(iter = middle_iter; iter != v4.end(); ++iter) cout<<*iter<<' ';
+    cout<<endl<<endl;
 }
