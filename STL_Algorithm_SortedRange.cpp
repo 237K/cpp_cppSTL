@@ -14,6 +14,10 @@
 //          4) equal_range(b, e, x, (f)) : x와 같은 원소의 순차열에 대한 반복자쌍을 반환
 //          5) merage(v1.begin, v1.end, v2.begin, v2.end, v3.begin) : v1, v2를 합병하여 v3에
 //          6) inplace_merge(b, middle_iter, e) : 두 구간을 합병, 정렬
+//          7) set_union(v1.begin, v1.end, v2.begin, v2.end, v3.begin) : v1, v2의 합집합을 v3에
+//          8) set_intersection(v1.begin, v1.end, v2.begin, v2.end, v3.begin) : v1, v2의 교집합을 v3에
+//          9) set_difference(v1.begin, v1.end, v2.begin, v2.end, v3.begin) : v1 - v2를 v3에 (차집합)
+//          10) set_symmetric_difference(v1.begin, v1.end, v2.begin, v2.end, v3.begin) : v1, v2 대칭차집합을 v3에
 //
 
 #include <iostream>
@@ -205,6 +209,52 @@ int main(void)
     cout<<"middle_iter : "<<*middle_iter<<endl;
     inplace_merge(v8.begin(), middle_iter, v8.end());
     cout<<"v8 : "; PrintV()(v8);
+    cout<<endl;
+    
+    //set_union
+    cout<<"7) set_union"<<endl;
+    cout<<"v4 : "; PrintV()(v4);
+    cout<<"v5 : "; PrintV()(v5);
+    cout<<"set_union"<<endl;
+    vector<int> v9(10);
+    vector<int>::iterator union_iter;
+    union_iter = set_union(v4.begin(), v4.end(), v5.begin(), v5.end(), v9.begin());
+    cout<<"v9 : "; PrintV()(v9);
+    cout<<"v9[begin, union_iter) : ";
+    for(iter = v9.begin(); iter != union_iter; ++iter)
+        cout<<*iter<<' ';
+    cout<<endl;
+    cout<<endl;
+    
+    //set_intersection
+    cout<<"8) set_intersection"<<endl;
+    cout<<"v4 : "; PrintV()(v4);
+    cout<<"v5 : "; PrintV()(v5);
+    cout<<"set_intersection"<<endl;
+    vector<int> v10(5);
+    vector<int>::iterator inter_iter;
+    inter_iter = set_intersection(v4.begin(), v4.end(), v5.begin(), v5.end(), v10.begin());
+    cout<<"v10 : "; PrintV()(v10);
+    cout<<endl;
+    
+    //set_difference
+    cout<<"9) set_difference"<<endl;
+    cout<<"v4 : "; PrintV()(v4);
+    cout<<"v5 : "; PrintV()(v5);
+    cout<<"set_difference"<<endl;
+    vector<int> v11(5);
+    set_difference(v4.begin(), v4.end(), v5.begin(), v5.end(), v11.begin());
+    cout<<"v4 - v5 : "; PrintV()(v11);
+    cout<<endl;
+    
+    //set_symmetric_difference
+    cout<<"10) set_symmetric_difference"<<endl;
+    cout<<"v4 : "; PrintV()(v4);
+    cout<<"v5 : "; PrintV()(v5);
+    cout<<"set_symmetric_difference"<<endl;
+    vector<int> v12(5);
+    set_symmetric_difference(v4.begin(), v4.end(), v5.begin(), v5.end(), v12.begin());
+    cout<<"v4, v5의 대칭차집합 : "; PrintV()(v12);
     cout<<endl;
     
 }
