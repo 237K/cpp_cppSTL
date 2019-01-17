@@ -5,7 +5,7 @@
 //  Created by 형성모 on 16/01/2019.
 //
 //  STL 알고리즘 #include <algorithm>
-//      5. 정렬 알고리즘
+//      6. 검색 알고리즘
 //          1) binary_search(b, e, x, (f)) : x와 같은 원소가 있는지 검색 후 bool값으로 반환
 //              - 순차열이 정렬되어 있다는 가정 하에 동작
 //              - a==b 연산을 사용하지 않고, !(a<b) && !(b<a) equivalence연산을 사용함
