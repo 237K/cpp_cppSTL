@@ -12,6 +12,8 @@
 //          2) includes(v1.begin, v1.end, v2.begin, v2.end) : v2가 v1의 부분집합이면 true, 아니면 false 반환
 //          3) lower_bound, upper_bound(b, e, x, (f)) :  x와 같은 첫원소와 x보다 큰 첫원소의 반복자를 반환
 //          4) equal_range(b, e, x, (f)) : x와 같은 원소의 순차열에 대한 반복자쌍을 반환
+//          5) merage(v1.begin, v1.end, v2.begin, v2.end, v3.begin) : v1, v2를 합병하여 v3에
+//          6) inplace_merge(b, middle_iter, e) : 두 구간을 합병, 정렬
 //
 
 #include <iostream>
@@ -168,4 +170,41 @@ int main(void)
         cout<<*iter<<' ';
     }
     cout<<endl<<endl;
+    
+    //merge
+    cout<<"5) merge"<<endl;
+    vector<int> v7(20);
+    vector<int>::iterator merge_iter;
+    cout<<"v3 : "; PrintV()(v3);
+    cout<<"v6 : "; PrintV()(v6);
+    cout<<endl;
+    cout<<"merge(v3, v6, v7)"<<endl;
+    merge_iter = merge(v3.begin(), v3.end(), v6.begin(), v6.end(), v7.begin());
+    cout<<"v3 : "; PrintV()(v3);
+    cout<<"v6 : "; PrintV()(v6);
+    cout<<"v7 : "; PrintV()(v7);
+    cout<<endl;
+    
+    //inplace_merge
+    cout<<"6) inplace_merge"<<endl;
+    vector<int> v8;
+    v8.push_back(10);
+    v8.push_back(20);
+    v8.push_back(30);
+    v8.push_back(40);
+    v8.push_back(50);
+    
+    v8.push_back(20);
+    v8.push_back(30);
+    v8.push_back(60);
+    
+    vector<int>::iterator middle_iter = v8.begin() + 5;
+    
+    cout<<"v8 : "; PrintV()(v8);
+    cout<<"inplace_merge"<<endl;
+    cout<<"middle_iter : "<<*middle_iter<<endl;
+    inplace_merge(v8.begin(), middle_iter, v8.end());
+    cout<<"v8 : "; PrintV()(v8);
+    cout<<endl;
+    
 }
