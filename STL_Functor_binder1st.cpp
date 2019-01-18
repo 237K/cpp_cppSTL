@@ -6,7 +6,8 @@
 //
 //  STL Functor
 //  binder1st<int>를 사용하여 binary_function을 unary_function처럼 기능하도록 해보았습니다.
-//
+//      1) Plus 펑터에 타입을 모두 정의함으로써 어댑터와 결합할 수 있도록 하였습니다.
+//      2) binary_function을 상속하는 방법으로 이항함수객체가 어댑터변환이 가능하도록 하였습니다.
 
 #include <iostream>
 #include <vector>
@@ -25,12 +26,12 @@ public:
 };
 
 template <typename T>
-class Plus
+class Plus : public binary_function<T, T, T>
 {
 public:
-    typedef T first_argument_type;
-    typedef T second_argument_type;
-    typedef T result_type;
+    //typedef T first_argument_type;
+    //typedef T second_argument_type;
+    //typedef T result_type;
 public:
     T operator()(const T& left, const T& right) const { return left+right; }
 };
