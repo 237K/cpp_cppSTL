@@ -23,7 +23,7 @@ private:
     RType (CType::*pf)() const;
 public:
     Mem_fun_ref_class(RType (CType::*_pf)() const) : pf(_pf){}
-    RType operator() (const CType& o) const
+    RType operator() (const CType& o) const                         //CType& 
     {
         return (o.*pf) ();
     }
@@ -34,6 +34,27 @@ template <typename RType, typename CType>
 Mem_fun_ref_class<RType, CType> Mem_fun_ref(RType (CType::*pf)() const)
 {
     return Mem_fun_ref_class<RType, CType>(pf);
+}
+
+
+//Mem_fun 클래스 정의
+template <typename RType, typename CType>
+class Mem_fun_class : public unary_function<CType, RType>
+{
+private:
+    RType (CType::*pf)() const;
+public:
+    Mem_fun_class(RType (CType::*_pf)() const) : pf(_pf) {}
+    RType operator() (const CType* p) const                         //CType*
+    {
+        return (p->*pf)();
+    }
+};
+
+template <typename RType, typename CType>
+Mem_fun_class<RType, CType> Mem_fun(RType (CType::*pf)() const)
+{
+    return Mem_fun_class<RType, CType>(pf);
 }
 
 class Point
@@ -67,4 +88,20 @@ int main(void)
     cout<<endl;
     cout<<"Mem_fun_ref(Point.Print형태, 객체로 멤버함수 호출"<<endl;
     for_each(vp1.begin(), vp1.end(), Mem_fun_ref(&Point::Print));
+    cout<<endl;
+    
+    vector<Point*> vp2;
+    vp2.push_back(new Point(1, 1));
+    vp2.push_back(new Point(2, 2));
+    vp2.push_back(new Point(3, 3));
+    vp2.push_back(new Point(4, 4));
+    vp2.push_back(new Point(5, 5));
+    cout<<"Mem_fun(Point->Print형태, 객체의 주소로 멤버함수 호출"<<endl;
+    for_each(vp2.begin(), vp2.end(), Mem_fun(&Point::Print));
+    cout<<endl;
+    
+    for(int i = 0 ; i < 5 ; ++i)
+        delete vp2[i];
+    
+    return 0;
 }
