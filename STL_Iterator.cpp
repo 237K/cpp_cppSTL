@@ -16,6 +16,9 @@
 //      *6. iostream_iterator
 //          1) ostream_iterator : copy / transform 등과 활용
 //          2) istream_iterator : copy 등과 활용
+//      7. 반복자 특성과 보조함수
+//          1) advance(p, n) : p 반복자를 p += n 위치로 이동
+//          2) distance(p1, p2) : p2 - p1 거리 반환. iterator_traits<vector<int>::iterator>::difference_type n = distance()
 //
 
 #include <iostream>
@@ -125,7 +128,33 @@ int main(void)
     
     copy(istream_iterator<int>(cin), istream_iterator<int>(), ostream_iterator<int>(cout, " "));
     cout<<"입력받아서 바로 출력"<<endl;
+    cout<<endl;
     
+    //advance
+    cout<<"advance"<<endl;
+    cout<<"v1 : ";
+    copy(v1.begin(), v1.end(), ostream_iterator<int>(cout, " "));
+    cout<<endl;
+    cout<<"lt1 : ";
+    copy(lt1.begin(), lt1.end(), ostream_iterator<int>(cout, " "));
+    cout<<endl<<endl;
+    
+    vector<int>::iterator viter1 = v1.begin();
+    list<int>::iterator liter1 = lt1.begin();
+    
+    cout<<"viter : "<<*viter1<<endl;
+    cout<<"liter : "<<*liter1<<endl;
+    
+    advance(viter1, 2);
+    advance(liter1, 2);
+    cout<<"viter : "<<*viter1<<endl;
+    cout<<"liter : "<<*liter1<<endl;
+    cout<<endl;
+    
+    //distance
+    cout<<"distance"<<endl;
+    cout<<"v1 원소 개수 : "<<v1.end() - v1.begin()<<endl;
+    cout<<"lt1 원소 개수 : "<<distance(lt1.begin(), lt1.end())<<endl;
     cout<<endl;
     
     return 0;
