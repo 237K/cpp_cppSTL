@@ -257,7 +257,22 @@ int main(void)
     cout<<"substr(5, 5) : "<<sub4<<endl;
     
     sub5 = sa1.substr(5, string::npos);
-    cout<<"substr(5, string::npos) : "<<sub5<<endl;
+    cout<<"substr(5, string::npos) : "<<sub5<<endl<<endl;
+    
+    //getline
+    cout<<"getline"<<endl;
+    string instr1, instr2, getstr1, getstr2;
+    
+    cout<<"문자열 두개를 입력하세요 : ";
+    cin>>instr1>>instr2;
+    cout<<"instr1 : "<<instr1<<endl;
+    cout<<"instr2 : "<<instr2<<endl;
+    
+    cout<<"문자열 두개를 입력하세요(공백 문자 입력 가능) : ";
+    getline(cin, getstr1, '\n');
+    getline(cin, getstr2, '\n');                    //cin.getline(getstr2);
+    cout<<"getstr1 : "<<getstr1<<endl;
+    cout<<"getstr2 : "<<getstr2<<endl;
     
     return 0;
 }
