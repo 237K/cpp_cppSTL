@@ -19,7 +19,7 @@
 //      12. end()
 //      13. erase(p)
 //      14. erase(b, e)
-//      15. find(c)
+//      15. find(c) / rfind(c)
 //      16. insert(n, sz)
 //      17. length()
 //      18. max_size()
@@ -142,6 +142,41 @@ int main(void)
     
     cout<<"s1.compare(off, n, s2, off2, n2) : "<<sc1.compare(0, 3, sc2, 2, 3)<<endl;
     cout<<"s1.compare(off, n, char, off2, n2) : "<<sc1.compare(0, 3, cc, 2, 3)<<endl<<endl;
+    
+    //copy
+    cout<<"copy (끝에 '\\0' 포함하지 않음)"<<endl;
+    char buffer[100];
+    sa10.copy(buffer, sa10.length());
+    buffer[sa10.length()] = '\0';
+    cout<<"copy(buffer, s.length) : "<<buffer<<endl;
+    
+    sa10.copy(buffer, 5, 5);
+    buffer[5] = '\0';
+    cout<<"copy(buffer, n, off) : "<<buffer<<endl<<endl;;
+    
+    //find, rfind
+    cout<<"find(), rfind()"<<endl;
+    
+    const char *cc2 = "\"Standard Containers\", \"A container is a holder object that stores a collection of other objects (its elements). They are implemented as class templates, which allows a great flexibility in the types supported as elements.\", \"The container manages the storage space for its elements and provides member functions to access them, either directly or through iterators (reference objects with similar properties to pointers).\", \"Containers replicate structures very commonly used in programming: dynamic arrays (vector), queues (queue), stacks (stack), heaps (priority_queue), linked lists (list), trees (set), associative arrays (map)...\", \"Many containers have several member functions in common, and share functionalities. The decision of which type of container to use for a specific need does not generally depend only on the functionality offered by the container, but also on the efficiency of some of its members (complexity). This is especially true for sequence containers, which offer different trade-offs in complexity between inserting/removing elements and accessing them.\", \"stack, queue and priority_queue are implemented as container adaptors. Container adaptors are not full container classes, but classes that provide a specific interface relying on an object of one of the container classes (such as deque or list) to handle the elements. The underlying container is encapsulated in such a way that its elements are accessed by the members of the container adaptor independently of the underlying container class used.\" ";
+    
+    string find_str("container");
+    string sc = cc2;
+    
+    cout<<sc<<endl<<endl;
+    cout<<"s.find('c') : "<<sc.find('c')<<endl;
+    cout<<"s.find('c', off) : "<<sc.find('c', 250)<<endl;
+    cout<<"s.find(\"container\") : "<<sc.find("container")<<endl;
+    cout<<"s.find(\"container\", off) : "<<sc.find("container", 250)<<endl;
+    cout<<"s.find(\"container classes\", off, n) : "<<sc.find("container classes", 0, 1)<<endl;
+    cout<<"s.find(string s2) : "<<sc.find(find_str)<<endl;
+    
+    string::size_type pos = sc.find("Not Found");
+    cout<<"일치하는 문자열을 발견하지 못한 경우 : "<<(int)pos<<endl;
+    cout<<"string::npos : "<<(int)string::npos<<endl;
+    
+    pos = sc.rfind('c');
+    if( string::npos != pos )
+        cout<<"s.find('c') : "<<pos<<endl;
     
     
     return 0;
