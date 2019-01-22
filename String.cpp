@@ -106,7 +106,43 @@ int main(void)
     
     for(string::iterator iter = t2.begin(); iter != t2.end(); ++iter)
         sa10.push_back(*iter);
-    cout<<"s.push_back(c) : "<<sa10<<endl;
+    cout<<"s.push_back(c) : "<<sa10<<endl<<endl;
+    
+    //c_str(), data()
+    cout<<"c_str(), data()"<<endl;
+    
+    const char *cstr;
+    const char *sdata;
+    
+    cstr = sa10.c_str();
+    sdata = sa10.data();
+    
+    cout<<"'\\0'문자로 끝나는 문자열(c_str) : "<<cstr<<endl;
+    cout<<"'\\0'문자 포함하지 않은 문자열 배열 : ";
+    for(int i = 0; i < 10; ++i)
+        cout<<sdata[i];
+    cout<<endl<<endl;
+    
+    //compare
+    cout<<"compare"<<endl;
+    cout<<"s1 > s2 : return (ASC코드 거리)"<<endl;
+    cout<<"s1 < s2 : return -(ASC코드 거리)"<<endl;
+    cout<<"s1 == s2 : return 0"<<endl;
+    cout<<"=====\"==========\"====="<<endl;
+    
+    string sc1("ABCDE");
+    string sc2("AKABC");
+    const char* cc = "AKABC";
+    
+    cout<<"s1.compare(s2) : "<<sc1.compare(sc2)<<endl;
+    cout<<"s1.compare(char) : "<<sc1.compare(cc)<<endl<<endl;
+    
+    cout<<"s1.compare(off, n, s2) : "<<sc1.compare(2, 3, sc2)<<endl;
+    cout<<"s1.compare(off, n, char) : "<<sc1.compare(2, 3, cc)<<endl<<endl;
+    
+    cout<<"s1.compare(off, n, s2, off2, n2) : "<<sc1.compare(0, 3, sc2, 2, 3)<<endl;
+    cout<<"s1.compare(off, n, char, off2, n2) : "<<sc1.compare(0, 3, cc, 2, 3)<<endl<<endl;
+    
     
     return 0;
 }
