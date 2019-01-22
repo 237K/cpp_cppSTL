@@ -176,8 +176,88 @@ int main(void)
     
     pos = sc.rfind('c');
     if( string::npos != pos )
-        cout<<"s.find('c') : "<<pos<<endl;
+        cout<<"s.find('c') : "<<pos<<endl<<endl;
     
+    //insert
+    cout<<"insert"<<endl;
+    string str1(" C++ ");
+    
+    sa1.insert(5, " C++ ");
+    cout<<"s.insert(pos, string) : "<<sa1<<endl;
+    
+    sa2.insert(5, " C++ ", 2);
+    cout<<"s.insert(pos, string, n) : "<<sa2<<endl;
+    
+    sa3.insert(5, str1);
+    cout<<"s.insert(pos, string str) : "<<sa3<<endl;
+    
+    sa4.insert(5, str1, 2, 3);
+    cout<<"s.insert(pos, string str, off, n) : "<<sa4<<endl;
+    
+    sa5.insert(5, 3, '+');
+    cout<<"s.insert(pos, n, char) : "<<sa5<<endl;
+    
+    sa7.insert(sa7.begin()+5, '+');
+    cout<<"s.insert(positer, char) : "<<sa7<<endl;
+    
+    sa8.insert(sa8.begin()+5, 3, '+');
+    cout<<"s.insert(positer, n, char) : "<<sa8<<endl;
+    
+    sa9.insert(sa9.begin()+5, str1.begin(), str1.end());
+    cout<<"s.insert(positer, iter1, iter2) : "<<sa9<<endl<<endl;
+    
+    //replace
+    cout<<"replace"<<endl;
+    string str2("|REPLACE|");
+    
+    sa1.replace(10, 8, "|REPLACE|");
+    cout<<"s.replace(pos, n, string) : "<<sa1<<endl;
+    
+    sa2.replace(10, 8, str2);
+    cout<<"s.replace(pos, n, string str) : "<<sa2<<endl;
+    
+    sa3.replace(10, 8, "|REPLACE|", 3);
+    cout<<"s.replace(pos, n, string str, n2) : "<<sa3<<endl;
+    
+    sa4.replace(10, 8, str2, 4, 6);
+    cout<<"s.replace(pos, n, string str, pos2, n2) : "<<sa4<<endl;
+    
+    sa5.replace(10, 3, 3, '/');
+    cout<<"s.replace(pos, n, ct, char) : "<<sa5<<endl;
+    
+    sa6.replace(sa6.begin()+10, sa6.begin()+13, "///");
+    cout<<"s.replace(begin_iter, end_iter, string) : "<<sa6<<endl;
+    
+    sa7.replace(sa7.begin()+10, sa7.begin()+13, str2);
+    cout<<"s.replace(begin_iter, end_iter, string str) : "<<sa7<<endl;
+    
+    sa8.replace(sa8.begin()+10, sa8.begin()+13, "////////", 3);
+    cout<<"s.replace(begin_iter, end_iter, string, n) : "<<sa8<<endl;
+    
+    sa9.replace(sa9.begin()+10, sa9.begin()+13, 3, '/');
+    cout<<"s.replace(begin_iter, end_iter, n, char) : "<<sa9<<endl;
+    
+    sa10.replace(sa10.begin(), sa10.end(), str2.begin(), str2.end());
+    cout<<"s.replace(begin_iter, end_iter, str_begin_iter, str_end_iter) : "<<sa10<<endl<<endl;
+    
+    //substr
+    cout<<"substr(pos, n) 만약 n 을 string::npos로 하면 문자열의 마지막 문자까지"<<endl;
+    string sub1, sub2, sub3, sub4, sub5;
+    
+    sub1 = sa1.substr(0);
+    cout<<"substr(0) 0부터 끝까지 : "<<sub1<<endl;
+    
+    sub2 = sa1.substr(0, string::npos);
+    cout<<"substr(0, string::npos) : "<<sub2<<endl;
+    
+    sub3 = sa1.substr(0, 5);
+    cout<<"substr(0, 5) : "<<sub3<<endl;
+    
+    sub4 = sa1.substr(5, 5);
+    cout<<"substr(5, 5) : "<<sub4<<endl;
+    
+    sub5 = sa1.substr(5, string::npos);
+    cout<<"substr(5, string::npos) : "<<sub5<<endl;
     
     return 0;
 }
